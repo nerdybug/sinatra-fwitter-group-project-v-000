@@ -75,6 +75,11 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/tweets/:tweet_id' do
+    @tweet = Tweet.find_by(id: params[:tweet_id])
+    erb :'/tweets/show_tweet'
+  end
+  
   post '/tweets' do
     @user = User.find_by(id: session[:user_id])
     if !params[:content].empty?
