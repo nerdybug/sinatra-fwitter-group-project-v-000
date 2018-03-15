@@ -63,7 +63,6 @@ class ApplicationController < Sinatra::Base
     else
       redirect '/login'
     end
-    # erb :'tweets/tweets'
   end
 
   get '/tweets/new' do
@@ -73,6 +72,31 @@ class ApplicationController < Sinatra::Base
     else
       redirect '/login'
     end
+  end
+
+  get '/tweets/:tweet_id' do
+    @tweet = Tweet.find_by(id: params[:tweet_id])
+    @user = User.find_by(id: @tweet.user_id)
+    if logged_in?
+      erb :'tweets/show_tweet'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/tweets/:tweet_id/edit' do
+    @tweet = Tweet.find_by(id: params[:tweet_id])
+    erb :'tweets/edit_tweet'
+  end
+
+  patch '/tweets/:tweet_id' do
+    @tweet = Tweet.find_by(id: params[:tweet_id])
+    if !params[:content].empty?
+      @tweet.update(content: params[:content])
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
+
   end
 
   post '/tweets' do
