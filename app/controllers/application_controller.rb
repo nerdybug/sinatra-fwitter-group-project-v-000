@@ -78,6 +78,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:tweet_id' do
     @tweet = Tweet.find_by(id: params[:tweet_id])
     @user = User.find_by(id: @tweet.user_id)
+    binding.pry
     erb :'/tweets/show_tweet'
   end
 
