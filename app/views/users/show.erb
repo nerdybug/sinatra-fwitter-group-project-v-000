@@ -1,0 +1,6 @@
+<h1>Viewing <%=@user.username%>'s Fwitter Tweets</h1>
+<%@user.tweets.all.each do |tweet|%>
+  <ul>
+    <li><%=tweet.content%></li>
+  </ul>
+<%end%>
