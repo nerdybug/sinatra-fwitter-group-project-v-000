@@ -66,6 +66,11 @@ class ApplicationController < Sinatra::Base
     # erb :'tweets/tweets'
   end
 
+  get '/users/:user_slug' do
+    @user = User.find_by_slug(params[:user_slug])
+    erb :'users/show'
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]
