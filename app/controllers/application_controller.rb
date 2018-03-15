@@ -118,6 +118,14 @@ class ApplicationController < Sinatra::Base
     erb :'users/show'
   end
 
+  delete '/tweets/:tweet_id' do
+    @tweet = Tweet.find_by(id: params[:tweet_id])
+    if session[:user_id] == @tweet.user_id
+      @tweet.delete
+    end
+    redirect '/tweets'
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]
