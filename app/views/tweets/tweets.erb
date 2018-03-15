@@ -2,6 +2,10 @@
 <br>
 <%Tweet.all.each do |tweet|%>
   <ul>
-    <li><%=tweet.content%></li>
+    <li><%=tweet.content%> - <a href="/tweets/<%=tweet.id%>/edit">Edit</a></li>
   </ul>
 <%end%>
+<br>
+<a href="/tweets/new">Create New Fwitter Tweet</a>
+<br></br>
+<a href="/logout">Logout</a>
