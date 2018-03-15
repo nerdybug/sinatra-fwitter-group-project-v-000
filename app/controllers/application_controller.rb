@@ -97,6 +97,7 @@ class ApplicationController < Sinatra::Base
     @tweet = Tweet.find_by(id: params[:tweet_id])
     if !params[:content].empty?
       @tweet.update(content: params[:content])
+      redirect "/tweets/#{@tweet.id}"
     else
       redirect "/tweets/#{@tweet.id}/edit"
     end
